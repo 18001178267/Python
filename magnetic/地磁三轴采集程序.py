@@ -108,4 +108,3 @@ while(a):
     i=i+1
 
     plt.pause(1)
-    

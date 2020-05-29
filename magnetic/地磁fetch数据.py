@@ -4,8 +4,7 @@ import time
 from datetime import datetime, timedelta #时间的增减
 import csv  #生成csv文件
 
-
-lastimei=input('请输入设备IMEI后5位\n')
+lastimei=input('请输入设备IMEI\n')
 start=input('请输入起始时间（%Y-%m-%d %H:%M:%S）\n')
 end=input('请输入结束时间（%Y-%m-%d %H:%M:%S）\n')
 
@@ -48,7 +47,7 @@ for i in range(st+100,et+1,100):
     strtime=datetime.fromtimestamp(i)
     #print(strtime)
     #fourth_data=strtime.strftime('%H:%M:%S')
-    imei='8662620425'+lastimei
+    imei=lastimei
     buf=send_query(imei,strtime)
     buf=buf.text
     buf = re.findall(r'[-]?\d+[.]\d+', buf) # 返回一个list类型数据
