@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from cv2.cv2 import GaussianBlur
 
-image = cv2.imread('C:\\Users\\YFZX\\Desktop\\Python_code\\license_plate\\soil_2.jpg')
+image = cv2.imread('C:\\Users\\YFZX\\Desktop\\Python_code\\license_plate\\9.jpg')
 output=image.copy()
 #print(image.shape)
 #cv2.imshow("image", image)
@@ -14,26 +14,32 @@ gray_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY )
 gauss=cv2.GaussianBlur(gray_img,(5,5),0)
 #cv2.imshow("Gauss", gauss)
 
-ret, thresh = cv2.threshold(gauss, 70, 255, cv2.THRESH_BINARY) # 阈值分割
-#cv2.imshow("thresh0",thresh )
+ret, thresh = cv2.threshold(gauss, 100, 255, cv2.THRESH_BINARY) # 阈值分割
+cv2.namedWindow('thresh0', 0)
+cv2.resizeWindow('thresh0', 600, 500)
+cv2.imshow("thresh0",thresh )
 
 #sobel = cv2.Sobel(thresh, cv2.CV_8U, 1, 1, ksize=1) #对原始灰度图进行边缘检测，初步筛选出包含车牌位置的若干个区域
 #cv2.imshow("sobel", sobel)
 
 
 kernel_dilate = np.ones((5,5), np.uint8)
-dilate = cv2.dilate(thresh, kernel_dilate, iterations=1)
+dilate = cv2.dilate(thresh, kernel_dilate, iterations=2)
 #cv2.imshow("dilate", dilate)
 '''
 
 '''
 canny=cv2.Canny(dilate, 200, 300)
+cv2.namedWindow('canny', 0)
+cv2.resizeWindow('canny', 600, 500)
 cv2.imshow("canny", canny)
 
 
 kernel_dilate = np.ones((5,5), np.uint8)
-dilate = cv2.dilate(canny, kernel_dilate, iterations=2)
-#cv2.imshow("dilate2", dilate)
+dilate = cv2.dilate(canny, kernel_dilate, iterations=20)
+cv2.namedWindow('dilate2', 0)
+cv2.resizeWindow('dilate2', 600, 500)
+cv2.imshow("dilate2", dilate)
 
 #sobel_2 = cv2.Sobel(erode, cv2.CV_8U, 1, 1, ksize=1) #对原始灰度图进行边缘检测，初步筛选出包含车牌位置的若干个区域
 #cv2.imshow("sobel_2", sobel_2)
@@ -54,16 +60,43 @@ if circles is not None:
 
     cv2.imshow('output', np.hstack([image, output]))
 '''
+
+
 contours, hier = cv2.findContours(dilate, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)  #只检测外轮廓，即轮廓不分级
 #print(contours[0].shape)
 a=np.size(contours)
 draw_coutours=cv2.drawContours(image,contours,-1,(0,0,255),3)
 #cv2.putText(image,a , (20, 50), cv2.FONT_HERSHEY_COMPLEX, 1.0, (255, 0, 0), 3)
+num=0
+for c in contours:
+    # find bounding box coordinates
+    # 现计算出一个简单的边界框
+    x, y, w, h = cv2.boundingRect(c) # 将轮廓信息转换成(x, y)坐标，并加上矩形的高度和宽度
+    circle_x= int((x+w)/2)
+    circle_y= int((y+h)/2)
+    circle_r= int(w/2)
+    #print(x,y,w,h)
+    if  h >300 or w>300 or float(h/w)>1.3 or float(w/h)>1.3  :
+        continue
+    #cv2.imwrite('con'+str(index)+'.jpg', result[y:y+h, x:x+w])
+    cv2.rectangle(output, (x, y), (x+w, y+h), (0, 255, 0), 2) # 画出矩形
+    num=num+1
+    print(num)
+    #cv2.circle(output, (circle_x, circle_y),circle_r, (0, 255, 0), 4)             # 画出圆形
+    #print(x,y,w,h)
+    #target = image[y:y+h, x:x+w]
+    #target_gray = cv2.cvtColor(target.copy(), cv2.COLOR_BGR2GRAY) # 灰度图
+    #cv2.imshow("target_gray",target_gray)
+    #ret, thresh = cv2.threshold(target_gray, 160, 255, cv2.THRESH_BINARY) # 阈值分割
+    #contours, hier = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    #cv2.drawContours(new,contours,-1,(0,255,0),3)
 
+a = "Total: "+ str(num)
+cv2.putText(output,a, (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1.0, (255, 0, 0), 3)
+cv2.namedWindow('Result', 0)
+cv2.resizeWindow('Result', 600, 500)
 
-a = "Total: "+ str(a)
-cv2.putText(draw_coutours,a, (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1.0, (255, 0, 0), 3)
-cv2.imshow("Result",draw_coutours)
-#cv2.imwrite('C:\\Users\\YFZX\\Desktop\\Python_code\\license_plate\\' + 'soil_detect.jpg',draw_coutours)
+cv2.imshow("Result",output)
+#cv2.imwrite('C:\\Users\\YFZX\\Desktop\\Python_code\\license_plate\\' + 'soil_detect_3.jpg',output)
 
 cv2.waitKey(0)

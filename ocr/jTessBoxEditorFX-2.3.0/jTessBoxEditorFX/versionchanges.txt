@@ -1,0 +1,40 @@
+jTessBoxEditorFX Change Summary
+
+Version 1.0 (06 January 2017):
+- Rewrite using JavaFX to address the issue of rendering complex scripts in Java Swing
+- Upgrade Tesseract training executable 3.05dev (2016-11-11) (from https://github.com/UB-Mannheim/tesseract/wiki)
+- Generated images are now compressed to reduce file size and save storage space
+- Additional parameters for text2image command
+- Use BreakIterator for character boundary analysis
+
+Version 1.0.1 (21 February 2017)
+- Create stub empty files for font_properties, frequent_words_list, and words_list, as needed
+
+Version 1.0.2 (4 June 2017)
+- Upgrade Tesseract training executable 3.05.01
+- Insert with a space
+- Fix reading box file containing space characters
+
+Version 2.0 (28 May 2018):
+- Upgrade Tesseract training executable 4.0.0-beta.1 (2018-04-14)
+- Use Tess4J 4.0.2 library
+- Implement Mark EOL with Tab character
+NOTE: LSTM Training not supported
+
+Version 2.0.1 (28 July 2018)
+- Fix "I/O error writing TIFF file!" when add noise
+- Update dependencies
+
+Version 2.1.0 (19 September 2018)
+- Upgrade Tesseract training executable 4.0.0-beta.4 (2018-09-12)
+
+Version 2.2.0 (30 October 2018)
+- Upgrade to Tesseract 4.0.0
+
+Version 2.3.0 (21 March 2020)
+- Support LSTM & WordStr box format
+- Support reordering boxes through table row drag-and-drop
+- Fix column alignment
+- Speed up spinners
+- Upgrade Tesseract training executable 5.0.0-alpha (2020-02-23)
+- Update dependencies

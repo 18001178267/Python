@@ -93,6 +93,8 @@ for c in contours:
 
 a = "Total: "+ str(num)
 cv2.putText(output,a, (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1.0, (255, 0, 0), 3)
+cv2.namedWindow('Result', 0)
+cv2.resizeWindow('Result', 600, 500)
 cv2.imshow("Result",output)
 #cv2.imwrite('C:\\Users\\YFZX\\Desktop\\Python_code\\license_plate\\' + 'soil_detect_3.jpg',output)
 
