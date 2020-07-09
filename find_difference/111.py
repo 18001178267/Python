@@ -33,19 +33,19 @@ if __name__ == '__main__':
         '--source_image',
         type=str,
         # default='original_img/original_01.png',
-        default='original_img/2_2.jpg',
+        default=r'original_img/2_2.jpg',
         help='source image'
     )
 
     parser.add_argument(
         '--target_image',
         type=str,
-        default='original_img/2_1.jpg',
+        default=r'original_img/2_1.jpg',
         help='target image'
     )
 
-    FLAGS, unparsed = parser.parse_known_args()
-
+    FLAGS, unparsed = parser.parse_known_args()  # ==args = vars(parser.parse_args());    args=parser.parse_args(args=None, namespace=None)
+    # print(FLAGS,unparsed)
     matchAB(FLAGS.source_image, FLAGS.target_image)
 
 # python 111.py --source_image='modified_01.png' --target_image='original.png'
