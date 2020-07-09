@@ -1,4 +1,4 @@
-import os,sys
+import os
 
 class ImageRename():
     def __init__(self):
