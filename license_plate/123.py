@@ -1,9 +1,3 @@
-import pytesseract
-from PIL import Image
-
-#pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe'
-
-image = Image.open('C:\\Users\\YFZX\\Desktop\\target.jpg')
-content = pytesseract.image_to_string(image, lang="chi_sim")   # 解析图片
-print(content)
-
+import numpy as np
+a = np.array([[1,2,3],[4,5,6]])
+print(np.where(a>3))

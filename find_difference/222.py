@@ -34,14 +34,14 @@ if __name__ == '__main__':
     parser.add_argument(
         '--source_image',
         type=str,
-        default='original_img/2_1.jpg',
+        default='original_img/2_11.jpg',
         help='source image'
     )
 
     parser.add_argument(
         '--target_image',
         type=str,
-        default='original_img/2_2.jpg',
+        default='original_img/2_22.jpg',
         help='target image'
     )
 

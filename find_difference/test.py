@@ -23,7 +23,7 @@ def matchAB(fileA, fileB):
             match = cv2.matchTemplate(grayB, window, cv2.TM_CCOEFF_NORMED)
             _, _, _, max_loc = cv2.minMaxLoc(match)
             matched_window = grayB[max_loc[1]:max_loc[1]+900, max_loc[0]:max_loc[0]+900]
-            result = cv2.absdiff(window, matched_window)
+            result = cv2.absdiff(window, matched_window)                                    # 重点！
             result_window[start_y:start_y+900, start_x:start_x+900] = result
     cv2.namedWindow('aaa',0)
     cv2.resizeWindow('aaa',800,600)
