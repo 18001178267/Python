@@ -3,7 +3,6 @@ from socket import *
 from random import choice
 from json import dumps
 from threading import Thread
-import tkinter.messagebox
 
 class ReceiveThread(Thread):
     def __init__(self, tcpCliSock, BUFSIZ=1024):
@@ -31,17 +30,13 @@ def sendMessage():
     Input.delete('1.0', END)
 
 def onClosing():
-    tkinter.messagebox.askyesnocancel("关闭确认窗口","确认要关闭窗口吗？")
     tcpCliSock.shutdown(SHUT_WR)
-    # tcpCliSock.close()
 
-
-# HOST = 'localhost'
-HOST = '192.168.0.161'
+HOST = 'localhost'
 POST = 3000
 BUFSIZ = 1024
 ADDR = (HOST, POST)
-NAME = choice(['业冰蝶','同静槐','骑婷然','牧建章','锐理全','达悠逸','倪长逸','侨玉书','符天韵','树修敏'])
+NAME = choice(['安防系统','人员管理系统'])
 
 tcpCliSock = socket(AF_INET, SOCK_STREAM)
 tcpCliSock.connect(ADDR)
@@ -50,7 +45,7 @@ root = Tk()
 sw = root.winfo_screenwidth()
 sh = root.winfo_screenheight()
 root.geometry('+{}+{}'.format((sw-430)//2, (sh-340)//2))
-root.title('Python聊天群 ({})'.format(NAME))
+root.title('园区系统平台 ({})'.format(NAME))
 
 frameT = Frame(root, width=460, height=320)
 frameB = Frame(root, width=460, height=80)

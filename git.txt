@@ -1,0 +1,14 @@
+新建仓库
+
+git clone https地址
+
+git add .        （注：别忘记后面的.，此操作是把Test文件夹下面的文件都添加进来）
+
+git commit  -m  "提交信息"  （注：“提交信息”里面换成你需要，如“first commit”）
+
+git pull origin master    （先使用pull，进行合并然后再进行push，即先使用pull将远程文件同步下来。）？
+
+git push -u origin master   （注：此操作目的是把本地仓库push到github上面，此步骤需要你输入帐号和密码）
+
+
+更新只用后四步
